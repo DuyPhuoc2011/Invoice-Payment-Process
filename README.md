@@ -1,1 +1,1 @@
-# Invoice-Payment-Process
+# Invoice Payment Process
