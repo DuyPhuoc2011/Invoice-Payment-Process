@@ -15,7 +15,7 @@
 1. Compiles code and runs it with command ```mvn spring-boot: run```
 2. By default, the home page is at **localhost:8080/** and username/password is **admin/admin**
 
-## Run custome backend application
+## Run custom backend application
 1. ```cd ./BackendApplication```
 2. ```mvn spring-boot: run```
 Access URL: http://localhost:3000
