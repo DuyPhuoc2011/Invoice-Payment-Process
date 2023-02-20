@@ -17,42 +17,42 @@ export class DashboardComponent implements OnInit{
               ){}
 
   ngOnInit(): void {
-    // this.camundaRestService.getTasks().subscribe((tasks) => {
-    //   this.tasks = tasks;
-    //   console.log("Fetched tasks", this.tasks);
-    //   this.invoices = [];
-    //   // var invoice:Invoice = new Invoice();
+    this.camundaRestService.getTasks().subscribe((tasks) => {
+      this.tasks = tasks;
+      console.log("Fetched tasks", this.tasks);
+      this.invoices = [];
+      // var invoice:Invoice = new Invoice();
 
-    //   this.tasks.forEach(task => {
-    //     var invoice:Invoice = new Invoice();
-    //     invoice.id = task.id;
-    //     this.camundaRestService.getVariableForTask(task.id, "invoiceCategory").subscribe(variable => {
-    //       invoice.category = variable.invoiceCategory.value;
-    //     });
-    //     this.camundaRestService.getVariableForTask(task.id, "amount").subscribe(variable => {
-    //       invoice.amount = variable.amount.value;
-    //     });
-    //     this.camundaRestService.getVariableForTask(task.id, "invoiceNumber").subscribe(variable => {
-    //       invoice.number = variable.invoiceNumber.value;
-    //     });
-    //     this.camundaRestService.getVariableForTask(task.id, "creditor").subscribe(variable => {
-    //       invoice.creditor = variable.creditor.value;
-    //     });
+      this.tasks.forEach(task => {
+        var invoice:Invoice = new Invoice();
+        invoice.id = task.id;
+        this.camundaRestService.getVariableForTask(task.id, "invoiceCategory").subscribe(variable => {
+          invoice.category = variable.invoiceCategory ? variable.invoiceCategory.value : null;
+        });
+        this.camundaRestService.getVariableForTask(task.id, "amount").subscribe(variable => {
+          invoice.amount = variable.amount ? variable.amount.value : null;
+        });
+        this.camundaRestService.getVariableForTask(task.id, "invoiceNumber").subscribe(variable => {
+          invoice.number = variable.invoiceNumber ? variable.invoiceNumber.value : null;
+        });
+        this.camundaRestService.getVariableForTask(task.id, "creditor").subscribe(variable => {
+          invoice.creditor = variable.creditor ? variable.creditor.value : null;
+        });
 
-    //     this.invoices.push(invoice);
-    //   });
+        this.invoices.push(invoice);
+      });
 
-    //   console.log("invoices: ", this.invoices);
-    // })
+      console.log("invoices: ", this.invoices);
+    })
 
 
     // this.camundaRestService.getTasks().subscribe(tasks => {
     //   console.log("called", tasks);
     // });
 
-    this.camundaRestService.testCall().subscribe(task => {
-      console.log("called");
-    });
+    // this.camundaRestService.testCall().subscribe(task => {
+    //   console.log("called", task);
+    // });
   }
 
   openCreatePaymentRequest(){

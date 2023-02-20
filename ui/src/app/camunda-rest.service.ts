@@ -13,14 +13,15 @@ const httpOptions = {
 @Injectable()
 export class CamundaRestService {
   private engineRestUrl = 'http://localhost:8080/engine-rest/'
-  private nodeServerUrl = 'http://localhost:3000/'
+  private backendApplicationURL = 'http://localhost:3000';
+  private nodeServerUrl = "";
   
   constructor(private http: HttpClient) {
 
   }
 
   getTasks(): Observable<Task[]> {
-    const url = this.engineRestUrl + "task?sortBy=created&sortOrder=desc&maxResults=100";
+    const url = this.backendApplicationURL + "/tasks";
     return this.http.get<any>(url).pipe(
       tap(form => this.log(`fetched tasks`)),
       catchError(this.handleError('getTasks', []))
@@ -36,7 +37,7 @@ export class CamundaRestService {
   // }
 
   getVariableForTask(taskId: String, variable: String): Observable<any> {
-    const url = this.nodeServerUrl + `getVariableForTask/` + taskId + `/` + variable;
+    const url = this.backendApplicationURL + `/getVariableForTask?` + `taskId=` + taskId +`&variable=`+ variable;
     return this.http.get<any>(url).pipe(
       tap(form => this.log(`fetched variables`)),
       catchError(this.handleError('getVariablesForTask', []))
@@ -69,8 +70,8 @@ export class CamundaRestService {
     //   catchError(this.handleError('getProcessDefinitions', [])));
   }
 
-  startProcessInstance(processDefinitionKey: any, variables: any): Observable<any> {
-    return this.http.post<any>(this.nodeServerUrl + `startProcessInstance/`+ `${processDefinitionKey}`, variables).pipe(
+  startProcessInstance(variables: any): Observable<any> {
+    return this.http.post<any>(this.backendApplicationURL + `/startProcessInstance`, variables).pipe(
       tap(processDefinitions => this.log(`posted process instance`)),
       catchError(this.handleError('startProcessInstance', []))
     );

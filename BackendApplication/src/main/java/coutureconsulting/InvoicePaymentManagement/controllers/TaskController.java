@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,5 +21,10 @@ public class TaskController {
     @GetMapping("/tasks")
     public String getTasks(){
         return this.RestTemplate.getForObject(env.getProperty("camundaRestEngineUrl") + "/task?sortBy=created&sortOrder=desc&maxResults=100", String.class);
+    }
+
+    @GetMapping("/getVariableForTask")
+    public String getVariableForTask(@RequestParam String taskId, @RequestParam String variable){
+        return this.RestTemplate.getForObject(env.getProperty("camundaRestEngineUrl") + "/task/" + taskId + "/form-variables?variableNames=" + variable, String.class);
     }
 }
