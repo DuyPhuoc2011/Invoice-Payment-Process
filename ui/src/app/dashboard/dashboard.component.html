@@ -1,0 +1,32 @@
+<div class="ui category search">
+    <div class="ui icon input">
+      <input class="prompt" type="text" placeholder="Search...">
+      <i class="search icon"></i>
+    </div>
+    <div class="results">
+
+    </div>
+    <table class="ui celled table">
+        <thead>
+          <tr><th>Invoice ID</th>
+          <th>Invoice Category</th>
+          <th>Amount</th>
+          <th>Invoice Number</th>
+          <th>Creditor</th>
+          <th>Status</th>
+        </tr></thead>
+        <tbody>
+          <tr *ngFor="let invoice of invoices;">
+            <td data-label="label"><a routerLink="/paymentDetails">{{invoice.id}}</a></td>
+            <td data-label="label">{{invoice.category}}</td>
+            <td data-label="label">{{invoice.amount}}</td>
+            <td data-label="label">{{invoice.number}}</td>
+            <td data-label="label">{{invoice.creditor}}</td>
+            <td data-label="label">NaN</td>
+          </tr>
+        </tbody>
+    </table>
+    <button class="ui icon button" (click)="openCreatePaymentRequest();">
+        <i class="plus icon"></i>
+    </button>
+</div>
