@@ -17,7 +17,7 @@
         </tr></thead>
         <tbody>
           <tr *ngFor="let invoice of invoices;">
-            <td data-label="label"><a routerLink="/paymentDetails">{{invoice.id}}</a></td>
+            <td data-label="label"><a routerLink="/paymentDetails/{{invoice.formKey}}/{{invoice.id}}">{{invoice.id}}</a></td>
             <td data-label="label">{{invoice.category}}</td>
             <td data-label="label">{{invoice.amount}}</td>
             <td data-label="label">{{invoice.number}}</td>

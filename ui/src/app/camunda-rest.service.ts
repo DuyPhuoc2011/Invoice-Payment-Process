@@ -45,7 +45,7 @@ export class CamundaRestService {
   }
 
   postCompleteTask(taskId: String, variables: any): Observable<any> {
-    return this.http.post<any>(this.nodeServerUrl + `completeTask/`+ `${taskId}`, variables).pipe(
+    return this.http.post<any>(this.backendApplicationURL + `/completeTask?taskId=`+ taskId, variables).pipe(
       tap(tasks => this.log(`posted complete task`)),
       catchError(this.handleError('postCompleteTask', []))
     );

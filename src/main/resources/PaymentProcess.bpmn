@@ -2,7 +2,7 @@
 <definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" id="sid-0b0aaa25-3baf-4875-9d7a-0907d599a9ef" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" exporter="Camunda Modeler" exporterVersion="5.5.1" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <dataStore id="FinancialAccountingSystem" name="Financial Accounting System" isUnlimited="false">
     <dataState id="DataState_1" />
-  </dataStore>  
+  </dataStore>
   <message id="foxMessage_en" name="foxMessage_en" />
   <collaboration id="collaboration_3">
     <participant id="Process_Engine_1" name="Payment Process" processRef="Payment_Process" />
@@ -45,7 +45,7 @@
     <sequenceFlow id="reviewNotSuccessful" name="No" sourceRef="Review_Successful" targetRef="Notify_Requester">
       <conditionExpression xsi:type="tFormalExpression">${!clarified}</conditionExpression>
     </sequenceFlow>
-    <userTask id="Approve_Invoice" name="Approve Invoice" camunda:formKey="embedded:/webapp/approve-invoice.html" camunda:dueDate="${dateTime().plusWeeks(2).toDate()}">
+    <userTask id="Approve_Invoice" name="Approve Invoice" camunda:formKey="ApproveInvoice" camunda:dueDate="${dateTime().plusWeeks(2).toDate()}">
       <documentation>Approve the invoice (or not).</documentation>
       <extensionElements />
       <incoming>sequenceFlow_178</incoming>
@@ -63,14 +63,14 @@
       <outgoing>reviewSuccessful</outgoing>
       <outgoing>reviewNotSuccessful</outgoing>
     </exclusiveGateway>
-    <userTask id="Review_Invoice" name="Review Invoice" camunda:formKey="embedded:/webapp/review-invoice.html">
+    <userTask id="Review_Invoice" name="Review Invoice" camunda:formKey="ReviewInvoice">
       <incoming>invoiceNotApproved</incoming>
       <outgoing>sequenceFlow_183</outgoing>
     </userTask>
     <endEvent id="End" name="End">
       <incoming>Flow_1obs490</incoming>
     </endEvent>
-    <userTask id="Prepare_Bank_Transfer" name="Prepare Bank Transfer" camunda:formKey="embedded:/webapp/prepare-bank-transfer.html" camunda:candidateGroups="accounting" camunda:dueDate="${dateTime().plusWeeks(1).toDate()}">
+    <userTask id="Prepare_Bank_Transfer" name="Prepare Bank Transfer" camunda:formKey="PrepareBankTransfer" camunda:candidateGroups="accounting" camunda:dueDate="${dateTime().plusWeeks(1).toDate()}">
       <documentation>Prepare the bank transfer.</documentation>
       <incoming>Invoice_Approved</incoming>
       <outgoing>Flow_1hmgi5d</outgoing>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CamundaRestService } from "../camunda-rest.service";
 import { Invoice } from '../schemas/Invoice';
 import { Task } from '../schemas/Task';
@@ -38,21 +38,12 @@ export class DashboardComponent implements OnInit{
         this.camundaRestService.getVariableForTask(task.id, "creditor").subscribe(variable => {
           invoice.creditor = variable.creditor ? variable.creditor.value : null;
         });
-
+        invoice.formKey = task.formKey;
         this.invoices.push(invoice);
       });
 
       console.log("invoices: ", this.invoices);
     })
-
-
-    // this.camundaRestService.getTasks().subscribe(tasks => {
-    //   console.log("called", tasks);
-    // });
-
-    // this.camundaRestService.testCall().subscribe(task => {
-    //   console.log("called", task);
-    // });
   }
 
   openCreatePaymentRequest(){

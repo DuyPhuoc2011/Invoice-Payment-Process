@@ -17,6 +17,9 @@ import { CreatePaymentRequestComponent } from './create-payment-request/create-p
 import { ParameterConfigurationComponent } from './parameter-configuration/parameter-configuration.component';
 import { ExportComponent } from './export/export.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { ApproveInvoiceComponent } from './approve-invoice/approve-invoice.component';
+import { ReviewInvoiceComponent } from './review-invoice/review-invoice.component';
+import { PrepareBankTransferComponent } from './prepare-bank-transfer/prepare-bank-transfer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
     CreatePaymentRequestComponent,
     ParameterConfigurationComponent,
     ExportComponent,
-    PaymentDetailsComponent
+    PaymentDetailsComponent,
+    ApproveInvoiceComponent,
+    ReviewInvoiceComponent,
+    PrepareBankTransferComponent
   ],
   imports: [
     FormsModule,

@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'request', component: CreatePaymentRequestComponent },
   { path: 'configuration', component: ParameterConfigurationComponent },
   { path: 'export', component: ExportComponent },
-  { path: 'paymentDetails', component: PaymentDetailsComponent }
+  { path: 'paymentDetails/:formKey/:taskId', component: PaymentDetailsComponent }
 ];
 
 @NgModule({

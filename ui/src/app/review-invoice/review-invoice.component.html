@@ -1,0 +1,21 @@
+
+<h2>Review Invoice</h2>
+<br>
+<h4>Invoice Document:</h4>{{document}}
+<br>
+<h4>Creditor:</h4>{{creditor}}
+<br>
+<h4>Amount:</h4>{{amount}}
+<br>
+<h4>Invoice Category:</h4>{{invoiceCategory}}
+<br>
+<h4>Invoice Number:</h4>{{invoiceNumber}}
+<br>
+<br>
+<div class="ui checkbox">
+    <input type="checkbox" [(ngModel)] = "approval">
+    <label>Could you clarify the invoice?</label>
+</div>
+<br>
+<br>
+<button class="ui primary button" (click)="submit();">Submit</button>
