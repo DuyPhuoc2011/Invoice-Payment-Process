@@ -11,6 +11,7 @@
     <laneSet id="laneSet_5">
       <lane id="Accountant" name="Accountant">
         <flowNodeRef>Prepare_Bank_Transfer</flowNodeRef>
+        <flowNodeRef>Archive_information</flowNodeRef>
       </lane>
       <lane id="teamAssistant" name="Team Assistant">
         <flowNodeRef>StartEvent_1</flowNodeRef>
@@ -25,7 +26,6 @@
       <lane id="Lane_0cz9v9x" name="System">
         <flowNodeRef>End</flowNodeRef>
         <flowNodeRef>Notify_Requester</flowNodeRef>
-        <flowNodeRef>Archive_information</flowNodeRef>
       </lane>
     </laneSet>
     <startEvent id="StartEvent_1" name="Invoice Received" camunda:formKey="embedded:/webapp/startForm.html">
@@ -39,7 +39,7 @@
     </sequenceFlow>
     <sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="Approve_Invoice" />
     <sequenceFlow id="sequenceFlow_183" isImmediate="true" sourceRef="Review_Invoice" targetRef="Review_Successful" />
-    <sequenceFlow id="Flow_18yzypn" sourceRef="Notify_Requester" targetRef="Archive_information" />
+    <sequenceFlow id="Flow_18yzypn" sourceRef="Notify_Requester" targetRef="End" />
     <sequenceFlow id="Invoice_Approved" name="Yes" sourceRef="nvoice_Approved" targetRef="Prepare_Bank_Transfer" />
     <sequenceFlow id="Flow_1hmgi5d" sourceRef="Prepare_Bank_Transfer" targetRef="Notify_Requester" />
     <sequenceFlow id="reviewNotSuccessful" name="No" sourceRef="Review_Successful" targetRef="Notify_Requester">
@@ -69,6 +69,7 @@
     </userTask>
     <endEvent id="End" name="End">
       <incoming>Flow_1obs490</incoming>
+      <incoming>Flow_18yzypn</incoming>
     </endEvent>
     <userTask id="Prepare_Bank_Transfer" name="Prepare Bank Transfer" camunda:formKey="PrepareBankTransfer" camunda:candidateGroups="accounting" camunda:dueDate="${dateTime().plusWeeks(1).toDate()}">
       <documentation>Prepare the bank transfer.</documentation>
@@ -80,15 +81,14 @@
       <incoming>reviewNotSuccessful</incoming>
       <outgoing>Flow_18yzypn</outgoing>
     </task>
-    <serviceTask id="Archive_information" name="Archive information" camunda:class="com.coutureconsulting.payment.workflow.UploadFileDelegate">
-      <documentation>For now only Upload file to Box</documentation>
-      <incoming>Flow_18yzypn</incoming>
-      <outgoing>Flow_1obs490</outgoing>
-    </serviceTask>
     <sequenceFlow id="Flow_1obs490" sourceRef="Archive_information" targetRef="End" />
     <userTask id="Assign_Approver" name="Assign Approver Group" camunda:formKey="embedded:/webapp/assignReviewer.html">
       <outgoing>sequenceFlow_178</outgoing>
     </userTask>
+    <serviceTask id="Archive_information" name="Archive information" camunda:class="com.coutureconsulting.payment.workflow.UploadFileDelegate">
+      <documentation>For now only Upload file to Box</documentation>
+      <outgoing>Flow_1obs490</outgoing>
+    </serviceTask>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_73">
     <bpmndi:BPMNPlane id="BPMNPlane_73" bpmnElement="collaboration_3">
@@ -147,12 +147,12 @@
         <omgdc:Bounds x="1032" y="580" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1a419mf_di" bpmnElement="Archive_information">
-        <omgdc:Bounds x="1180" y="580" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1c4n5pe_di" bpmnElement="Assign_Approver">
         <omgdc:Bounds x="510" y="132" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1a419mf_di" bpmnElement="Archive_information">
+        <omgdc:Bounds x="1220" y="460" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="ja_186_gui" bpmnElement="reviewSuccessful" sourceElement="Kl_rung_erfolgreich__153_gui" targetElement="Rechnung_freigeben_125_gui">
         <omgdi:waypoint x="1082" y="152" />
@@ -201,7 +201,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_18yzypn_di" bpmnElement="Flow_18yzypn">
         <omgdi:waypoint x="1132" y="620" />
-        <omgdi:waypoint x="1180" y="620" />
+        <omgdi:waypoint x="1316" y="620" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ha7usz_di" bpmnElement="Invoice_Approved">
         <omgdi:waypoint x="778" y="364" />
@@ -225,8 +225,10 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1obs490_di" bpmnElement="Flow_1obs490">
-        <omgdi:waypoint x="1280" y="620" />
-        <omgdi:waypoint x="1316" y="620" />
+        <omgdi:waypoint x="1270" y="540" />
+        <omgdi:waypoint x="1270" y="573" />
+        <omgdi:waypoint x="1330" y="573" />
+        <omgdi:waypoint x="1330" y="606" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -1,0 +1,23 @@
+version: '3'
+services:
+  ui:
+    image: invoice-management-ui:latest
+    restart: always
+    ports:
+      - 4200:4200
+    depends_on:
+      - backend
+
+  backend:
+    image: invoice-management-backend:latest
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - camunda-engine
+
+  camunda-engine:
+    image: invoice-management-camunda-engine:latest
+    restart: always
+    ports:
+      - 8080:8080

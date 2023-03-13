@@ -1,8 +1,6 @@
-<!-- <app-login [hidden]="hidden" (hideEvent)="hideLoginForm($event)"></app-login> -->
-<div>
+<!-- <div>
   <div class="ui left fixed vertical menu" >
     <div class="item">
-      <!-- <img class="ui mini image" src="../../static/Camunda-workflow-engine-gradient.png"> -->
     </div>
     <a routerLink="/dashboard" class="item"><b>Dashboard</b></a>
     <a routerLink="/configuration" class="item"><b>Parameter configuration</b></a>
@@ -11,4 +9,6 @@
   <div class="main">
     <router-outlet></router-outlet>
   </div>
-</div>
+</div> -->
+<router-outlet></router-outlet>
+<router-outlet name="main"></router-outlet>

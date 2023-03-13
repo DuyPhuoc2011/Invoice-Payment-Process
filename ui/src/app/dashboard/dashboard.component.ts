@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { CamundaRestService } from "../camunda-rest.service";
+import { CamundaRestService } from "../services/rest.service";
 import { Invoice } from '../schemas/Invoice';
 import { Task } from '../schemas/Task';
 
@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit{
           invoice.creditor = variable.creditor ? variable.creditor.value : null;
         });
         invoice.formKey = task.formKey;
+        invoice.name = task.name;
         this.invoices.push(invoice);
       });
 

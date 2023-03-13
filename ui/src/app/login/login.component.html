@@ -1,1 +1,16 @@
-<p>Login</p>
+<div class="container">
+	<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="ui form">
+        <h2 class="text-center">Invoice Payment Management</h2>
+        <br>
+		<div class="form-group field">
+			<label for="exampleInputEmail1">User name</label>
+            <input type="text" class="form-control" formControlName="userName" placeholder="Enter username">
+    </div>
+    
+    <div class="form-group field">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" formControlName="password" placeholder="Password">
+    </div>
+    <button type="submit" class="ui button" [disabled]="!loginForm.valid">Login</button>
+  </form>
+</div>

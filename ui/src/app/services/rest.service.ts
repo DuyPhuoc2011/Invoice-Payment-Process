@@ -3,26 +3,29 @@ import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ProcessDefinition } from './schemas/ProcessDefinition';
-import { Task } from './schemas/Task';
+import { ProcessDefinition } from '../schemas/ProcessDefinition';
+import { Task } from '../schemas/Task';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+const header = new HttpHeaders().set('Authorization', sessionStorage.getItem('token') + "");
+const headers = { headers: header };
 
 @Injectable()
 export class CamundaRestService {
   private engineRestUrl = 'http://localhost:8080/engine-rest/'
   private backendApplicationURL = 'http://localhost:3000';
   private nodeServerUrl = "";
-  
+
   constructor(private http: HttpClient) {
 
   }
 
+
   getTasks(): Observable<Task[]> {
     const url = this.backendApplicationURL + "/tasks";
-    return this.http.get<any>(url).pipe(
+    return this.http.get<any>(url, headers).pipe(
       tap(form => this.log(`fetched tasks`)),
       catchError(this.handleError('getTasks', []))
     );
@@ -38,7 +41,7 @@ export class CamundaRestService {
 
   getVariableForTask(taskId: String, variable: String): Observable<any> {
     const url = this.backendApplicationURL + `/getVariableForTask?` + `taskId=` + taskId +`&variable=`+ variable;
-    return this.http.get<any>(url).pipe(
+    return this.http.get<any>(url, headers).pipe(
       tap(form => this.log(`fetched variables`)),
       catchError(this.handleError('getVariablesForTask', []))
     );
@@ -53,14 +56,14 @@ export class CamundaRestService {
 
   getProcessDefinitionTaskKey(processDefinitionKey: any): Observable<any> {
     const url = this.nodeServerUrl + `getProcessDefinitionTaskKey/` + `${processDefinitionKey}`
-    return this.http.get<any>(url).pipe(
+    return this.http.get<any>(url, headers).pipe(
       tap(form => this.log(`fetched formkey`)),
       catchError(this.handleError('getProcessDeifnitionFormKey', []))
     );
   }
 
   getProcessDefinitions(): Observable<ProcessDefinition[]> {
-    return this.http.get<ProcessDefinition[]>(this.nodeServerUrl + "getProcessDefinitions").pipe(
+    return this.http.get<ProcessDefinition[]>(this.nodeServerUrl + "getProcessDefinitions", headers).pipe(
       tap(processDefinitions => console.log("Process definitions: ", processDefinitions)),
       catchError(this.handleError('getProcessDefinitions', []))
     );
@@ -77,13 +80,13 @@ export class CamundaRestService {
     );
   }
 
-  getRenderedForm(id: String): Observable<any> {
-    const url = this.nodeServerUrl + `task/` + `${id}`
-    return this.http.get<any>(url).pipe(
-      tap(form => this.log(`fetched task form`)),
-      catchError(this.handleError('getTaskForm', []))
-    );
-  }
+  // getRenderedForm(id: String): Observable<any> {
+  //   const url = this.nodeServerUrl + `task/` + `${id}`
+  //   return this.http.get<any>(url).pipe(
+  //     tap(form => this.log(`fetched task form`)),
+  //     catchError(this.handleError('getTaskForm', []))
+  //   );
+  // }
 
   // deployProcess(fileToUpload: File): Observable<any> {
   //   const endpoint = `${this.engineRestUrl}deployment/create`;
@@ -115,9 +118,19 @@ export class CamundaRestService {
 
   testCall(): Observable<any> {
     const url = "http://localhost:3000/tasks";
-    return this.http.get<any>(url).pipe(
+    return this.http.get<any>(url, headers).pipe(
       tap(form => this.log(`test called`)),
       catchError(this.handleError('test called error', []))
+    );
+  }
+
+
+  authenticate(credentials:any):Observable<any>{
+    const url = this.backendApplicationURL + "/authenticate";
+    var headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(url, credentials,  {responseType: 'text'}).pipe(
+      tap(result => this.log(`login result`)),
+      catchError(this.handleError('login', []))
     );
   }
 

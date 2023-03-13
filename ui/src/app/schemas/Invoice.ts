@@ -6,4 +6,5 @@ export class Invoice{
     creditor!:String;
     status!:String;
     formKey!:String;
+    name!:String;
 }

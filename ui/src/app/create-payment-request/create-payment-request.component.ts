@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
-import { CamundaRestService } from '../camunda-rest.service';
+import { CamundaRestService } from '../services/rest.service';
 
 @Component({
   selector: 'app-create-payment-request',

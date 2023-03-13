@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CamundaRestService } from '../camunda-rest.service';
+import { CamundaRestService } from '../services/rest.service';
 
 @Component({
   selector: 'app-approve-invoice',

@@ -18,13 +18,13 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable();
-                // by default uses a Bean by the name of corsConfigurationSource
-//                .cors(withDefaults());
-        return http.build();
-    }
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.cors().and().csrf().disable();
+//                // by default uses a Bean by the name of corsConfigurationSource
+////                .cors(withDefaults());
+//        return http.build();
+//    }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource()

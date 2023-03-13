@@ -6,7 +6,7 @@ import { HttpClientModule }    from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CamundaRestService } from './camunda-rest.service';
+import { CamundaRestService } from './services/rest.service';
 import { GenericForm } from './generic-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,6 +20,7 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
 import { ApproveInvoiceComponent } from './approve-invoice/approve-invoice.component';
 import { ReviewInvoiceComponent } from './review-invoice/review-invoice.component';
 import { PrepareBankTransferComponent } from './prepare-bank-transfer/prepare-bank-transfer.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PrepareBankTransferComponent } from './prepare-bank-transfer/prepare-ba
     PaymentDetailsComponent,
     ApproveInvoiceComponent,
     ReviewInvoiceComponent,
-    PrepareBankTransferComponent
+    PrepareBankTransferComponent,
+    HomeComponent
   ],
   imports: [
     FormsModule,
