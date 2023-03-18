@@ -9,7 +9,6 @@
 1. Clone and Import as maven project into your IDE
 2. If this is the first time, you should:
 - run the command ```mvn clean``` so your build will start from a clean slate.
-- unzip file "initial db.zip" (in folder "Camunda_Application\HR_LeaveManagement") to "C:\h2db".
 
 ## Run Camunda Process Engine
 1. Compiles code and runs it with command ```mvn spring-boot: run```
@@ -24,4 +23,5 @@ Access URL: http://localhost:3000
 1. ```cd ./ui```
 2. ```npm install```
 3. ```npm start```
+4. Default user to login is **User/password**
 Access URL: http://localhost:4200
